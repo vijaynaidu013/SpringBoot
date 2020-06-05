@@ -87,4 +87,18 @@ stages:
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
               
-
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Azure Resource Manager'
+              azureSubscriptionEndpoint: 'Visual Studio Enterprise(9c5190a7-8f3b-46da-9681-2ffa99ab9570)'
+              azureResourceGroup: 'AKSRG'
+              kubernetesCluster: 'aksgourav'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: '$(System.DefaultWorkingDirectory)/_gouravpatel1996.SpringBoot/manifests/deployment.yml'
+              secretType: 'dockerRegistry'
+              containerRegistryType: 'Azure Container Registry'
+              azureSubscriptionEndpointForSecrets: 'Visual Studio Enterprise(9c5190a7-8f3b-46da-9681-2ffa99ab9570)'
+              azureContainerRegistry: 'acrgourav.azurecr.io'
+              secretName: 'mysecretkey'
+          
