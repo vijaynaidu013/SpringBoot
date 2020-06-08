@@ -1,19 +1,19 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: "myakscluster"
+  name: "gouravakscluster"
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: myakscluster
+        app: gouravakscluster
     spec:
       containers:
-        - name: "myakscluster"
+        - name: "gouravakscluster"
           image: "acrgourav.azurecr.io/gouravpatelspringboot"
           ports:
           - containerPort: 8080
     selector:
      matchLabels:
-      app: myakscluster
+      app: gouravakscluster
