@@ -7,10 +7,13 @@ spec:
   template:
     metadata:
       labels:
-        app: "myakscluster"
+        app: myakscluster
     spec:
       containers:
         - name: "myakscluster"
           image: "acrgourav.azurecr.io/gouravpatelspringboot"
           ports:
           - containerPort: 8080
+    selector:
+     matchLabels:
+      app: myakscluster
