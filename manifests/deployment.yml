@@ -1,18 +1,23 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "gouravakscluster"
+  name: frontend
+  labels:
+    app: mywebsite
+    tier: frontend
 spec:
   replicas: 2
   template:
     metadata:
+      name: gouravakscluster
       labels:
         app: gouravakscluster
     spec:
       containers:
-        - name: "gouravakscluster"
-          image: "acrgourav.azurecr.io/gouravpatelspringboot"
+        - name: gouravakscluster
+          image: acrgourav.azurecr.io/gouravpatelspringboot
           ports:
-          - containerPort: 8080
+           - containerPort: 8080
   selector:
+    matchLabels:
       app: gouravakscluster
