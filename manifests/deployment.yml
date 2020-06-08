@@ -14,5 +14,5 @@ spec:
           image: "acrgourav.azurecr.io/gouravpatelspringboot"
           ports:
           - containerPort: 8080
-    selector:
+  selector:
       app: gouravakscluster
