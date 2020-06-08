@@ -1,4 +1,4 @@
-apiVersion : apps/v1beta1
+apiVersion : apps/v1
 kind: Deployment
 metadata:
   name: "myakscluster"
@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
         - name: "myakscluster"
-          image: "myspringbootdemoapp.azurecr.io/myakscluster"
+          image: "acrgourav.azurecr.io/gouravpatelspringboot"
           ports:
           - containerPort: 8080
