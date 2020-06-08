@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: "myakscluster"
+    name: "gouravakscluster"
     labels:
-        app: myakscluster
+        app: gouravakscluster
 spec:
     type: LoadBalancer
     ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
     selector:
-        app: myakscluster
+        app: gouravakscluster
