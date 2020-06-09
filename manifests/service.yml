@@ -23,7 +23,7 @@ metadata:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-  - host: gouravakscluster.<CLUSTER_SPECIFIC_DNS_ZONE>
+  - host: gouravakscluster.a694aaf205694363b0c9.westeurope.aksapp.io
     http:
       paths:
        - path: /hello
