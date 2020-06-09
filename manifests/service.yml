@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -13,3 +14,20 @@ spec:
       name: http
     selector:
         app: gouravakscluster
+    type: ClusterIP    
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gouravakscluster
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: gouravakscluster.<CLUSTER_SPECIFIC_DNS_ZONE>
+    http:
+      paths:
+       - path: /hello
+         backend:
+          serviceName: gouravakscluster
+          servicePort: 80
