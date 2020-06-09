@@ -14,7 +14,6 @@ spec:
       name: http
     selector:
         app: gouravakscluster
-    type: ClusterIP    
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
