@@ -75,7 +75,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'gouravpatel1996SpringBoot-1214.kube-public'
+    environment: 'gouravpatel1996SpringBoot-1214.kube-default'
     strategy:
       runOnce:
         deploy:
