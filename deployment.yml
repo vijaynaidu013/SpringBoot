@@ -39,7 +39,7 @@ metadata:
     app: aks-mydigitalthread
     tier: frontend
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       name: aks-mydigitalthread
