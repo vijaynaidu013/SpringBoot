@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "aks-mydigitalthread"
+    labels:
+        app: aks-mydigitalthread
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+    selector:
+        app: aks-mydigitalthread
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aks-mydigitalthread
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: aks-mydigitalthread-2f81d1a9.hcp.eastus.azmk8s.io
+    http:
+      paths:
+       - path: /hello
+         backend:
+          serviceName: aks-mydigitalthread
+          servicePort: 80
+          
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: mywebsite
+    tier: frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: aks-mydigitalthread
+      labels:
+        app: aks-mydigitalthread
+    spec:
+      containers:
+        - name: aks-mydigitalthread
+          image: adopcontainerregistry.azurecr.io/hello-world
+          ports:
+           - containerPort: 8080
+  selector:
+    matchLabels:
+      app: aks-mydigitalthread
