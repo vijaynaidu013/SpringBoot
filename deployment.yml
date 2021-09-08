@@ -7,8 +7,8 @@ metadata:
 spec:
     type: LoadBalancer
     ports:
-    - port: 80
-      targetPort: 8080
+    - port: 9000
+      targetPort: 31018
       protocol: TCP
       name: http
     selector:
@@ -28,7 +28,7 @@ spec:
        - path: /hello
          backend:
           serviceName: aks-mydigitalthread
-          servicePort: 80
+          servicePort: 9000
           
 ---
 apiVersion: apps/v1
@@ -50,7 +50,7 @@ spec:
         - name: aks-mydigitalthread
           image: adopcontainerregistry.azurecr.io/hello-world
           ports:
-           - containerPort: 8080
+           - containerPort: 9000
   selector:
     matchLabels:
       app: aks-mydigitalthread
