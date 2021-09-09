@@ -11,7 +11,7 @@ public class DemoController {
 @GetMapping(path="/hello")
 	public String hello()
 	{
-		return "Hello World, I am Springboot application";
+		return "Hi, Welcome to Springboot Java Application";
 	}
 	
 }
