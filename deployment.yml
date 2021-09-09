@@ -34,9 +34,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: aks-mydigitalthread
   labels:
-    app: mywebsite
+    app: aks-mydigitalthread
     tier: frontend
 spec:
   replicas: 1
