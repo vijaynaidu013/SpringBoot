@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: "aks-mydigitalthread"
+    name: "helloapp"
     labels:
-        app: aks-mydigitalthread
+        app: helloapp
 spec:
     type: LoadBalancer
     ports:
@@ -17,7 +17,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: aks-mydigitalthread
+  name: helloapp
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
@@ -27,30 +27,30 @@ spec:
       paths:
        - path: /hello
          backend:
-          serviceName: aks-mydigitalthread
+          serviceName: helloapp
           servicePort: 80
           
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aks-mydigitalthread
+  name: helloapp
   labels:
-    app: aks-mydigitalthread
+    app: helloapp
     tier: frontend
 spec:
   replicas: 1
   template:
     metadata:
-      name: aks-mydigitalthread
+      name: helloapp
       labels:
-        app: aks-mydigitalthread
+        app: helloapp
     spec:
       containers:
-        - name: aks-mydigitalthread
-          image: adopcontainerregistry.azurecr.io/hello-world
+        - name: helloapp
+          image: adopcontainerregistry.azurecr.io/Springboot-Hello
           ports:
            - containerPort: 8080
   selector:
     matchLabels:
-      app: aks-mydigitalthread
+      app: helloapp
