@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: helloapp
-          image: adopcontainerregistry.azurecr.io/springboot-hello
+          image:  adopcontainerregistry.azurecr.io/hello-world
           ports:
            - containerPort: 8080
   selector:
