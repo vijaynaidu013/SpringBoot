@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: helloapp
-          image:  adopcontainerregistry.azurecr.io/hello-world
+          image:  adopcontainerregistry.azurecr.io/hello-world:latest
           ports:
            - containerPort: 8080
   selector:
