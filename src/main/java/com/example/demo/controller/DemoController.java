@@ -11,7 +11,7 @@ public class DemoController {
 @GetMapping(path="/hello")
 	public String hello()
 	{
-		return "I am Sampleapp2";
+		return "Hello World";
 	}
 	
 }
