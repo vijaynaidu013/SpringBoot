@@ -11,7 +11,7 @@ public class DemoController {
 @GetMapping(path="/hello")
 	public String hello()
 	{
-		return "Hello I am JAVA Spingboot";
+		return "Hello This is Maturity Visualizer App";
 	}
 	
 }
