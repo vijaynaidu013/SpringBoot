@@ -11,7 +11,7 @@ public class DemoController {
 @GetMapping(path="/hello")
 	public String hello()
 	{
-		return "Hello This is Maturity Visualizer App1";
+		return "Hello This is Maturity Visualizer Application";
 	}
 	
 }
