@@ -1,0 +1,73 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build 
+  jobs:
+  - job: Build
+
+    steps:
+    - task: Maven@3
+      inputs:
+          mavenPomFile: 'pom.xml'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
+
+    - task: CopyFiles@2
+      inputs:
+          SourceFolder: '$(system.defaultworkingdirectory)'
+          Contents: |
+            **/*.jar
+            **/deployment.yml
+          TargetFolder: '$(build.artifactstagingdirectory)'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'hello-world1'
+        publishLocation: 'Container'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'ACR'
+        repository: 'hello-world1'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+
+
+- stage: Deploy
+  jobs:
+  - job: Deploy
+
+    steps:
+
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'createSecret'
+        kubernetesServiceConnection: 'aks connection'
+        namespace: 'default'
+        secretType: 'dockerRegistry'
+        secretName: 'test'
+        dockerRegistryEndpoint: 'ACR'
+
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'deploy'
+        kubernetesServiceConnection: 'aks connection'
+        namespace: 'default'
+        manifests: '$(System.DefaultWorkingDirectory)/_MMA Test/hello-world1/deployment.yml'
+        containers: 'adopcontainerregistry.azurecr.io/hello-world1:$(Build.BuildId)'
+        imagePullSecrets: 'test'
